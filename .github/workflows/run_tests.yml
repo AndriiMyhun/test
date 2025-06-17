@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       deployment_target:
-        description: seletc tests to run
+        description: select tests to run
         required: true
         type: choice
         default: all
@@ -16,13 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Tests 
     steps: 
-      - name: Copy Source code
+      - name: Copy source code
         uses: actions/checkout@v4
+      
       - name: Set up Python env
-        uses: actions/checkout@v5
+        uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: install dependensies
+      
+      - name: Install dependencies
         run: pip install -r requirements.txt
+
       - name: Run tests
         run: pytest -v
